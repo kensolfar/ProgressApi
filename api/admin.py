@@ -1,5 +1,15 @@
 from django.contrib import admin
-from .models import Objetivo, Rutina, Miembro, MiembroTipo, MiembroEstado, Genero, Medicion
+from .models import (
+    Objetivo,
+    Rutina,
+    Instructor,
+    Miembro,
+    MiembroTipo,
+    MiembroEstado,
+    Genero,
+    Medicion
+)
+
 
 @admin.register(Objetivo)
 class ObjetivoAdmin(admin.ModelAdmin):
@@ -11,6 +21,13 @@ class ObjetivoAdmin(admin.ModelAdmin):
 @admin.register(Miembro)
 class MiembroAdmin(admin.ModelAdmin):
     list_display = ['nombre','apellidos','tipo_membresia']
+    list_filter = ['nombre']
+    search_fields = ['nombre','apellidos']
+
+
+@admin.register(Instructor)
+class InstructorAdmin(admin.ModelAdmin):
+    list_display = ['nombre','apellidos']
     list_filter = ['nombre']
     search_fields = ['nombre','apellidos']
 

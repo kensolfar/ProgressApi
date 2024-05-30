@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
-from django.utils.timezone import now
-from datetime import date
 
 
 class MiembroEstado(models.Model):
@@ -57,6 +55,7 @@ class Instructor(models.Model):
     nombre = models.CharField(max_length=255)
     apellidos = models.CharField(max_length=255)
     fecha_de_registro = models.DateField(auto_now_add=True)
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.nombre
@@ -83,6 +82,15 @@ class Rutina(models.Model):
     semanas = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)], default=6)
     objetivo = models.ForeignKey(Objetivo, on_delete=models.SET_NULL, null=True, related_name='objetivo')
 
+    class Meta:
+        indexes = [
+            models.Index(fields=["fecha", "miembro"]),
+            models.Index(fields=["miembro"]),
+            models.Index(fields=["fecha"]),
+            models.Index(fields=["instructor"]),
+        ]
+        unique_together = (('fecha', 'miembro', 'instructor'),)
+
     def __str__(self):
         return self.miembro
 
@@ -102,6 +110,8 @@ class Medicion(models.Model):
     brazo_derecho = models.FloatField(null=True)
     pierna_izquierda = models.FloatField(null=True)
     pierna_derecha = models.FloatField(null=True)
+    pantorrilla_izquierda = models.FloatField(null=True)
+    pantorrilla_derecha = models.FloatField(null=True)
 
     def __str__(self):
         return self.miembro
