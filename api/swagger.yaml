@@ -1,0 +1,509 @@
+openapi: 3.0.3
+info:
+  title: Progress API
+  description: |-
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: http://127.0.0.1:8000/api
+tags:
+  - name: Miembro
+    description: Operaciones para la administracion de los Miembros del gimnasio
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+  - name: store
+    description: Access to Petstore orders
+    externalDocs:
+      description: Find out more about our store
+      url: http://swagger.io
+  - name: user
+    description: Operations about user
+paths:
+  /miembro/:
+    get:
+      tags:
+        - Miembro
+      summary: Obtener la informacion de todos los miembros
+      description: Description Placeholder
+      operationId: getMembers
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Miembro'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Miembro'
+        '400':
+          description: Entrada invalida
+        '404':
+          description: Miembro no encontrado
+        '422':
+          description: Exepcion de validacion
+      security:
+        - petstore_auth:
+            - write:miembro
+            - read:miembro
+  /miembro/findByEstado:
+    get:
+      tags:
+        - Miembro
+      summary: Encuentra miembros por su estatus
+      description: Multiples valores de estados pueden ser proporcionados separados por comas
+      operationId: findMiembroPorEstado
+      parameters:
+        - name: estado
+          in: query
+          description: Valores de estado a ser considerados por el filtro.
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: activo
+            enum:
+              - activo
+              - nuevo
+              - inactivo
+      responses:
+        '200':
+          description: Operacion exitosa
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Miembro'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Miembro'
+        '400':
+          description: Invalid status value
+      security:
+        - petstore_auth:
+            - write:miembro
+            - read:miembro
+  /miembro/findByTipo:
+    get:
+      tags:
+        - pet
+      summary: Encuenta los miembros por tipo
+      description: Multipes tipos pueden ser agredados separados por coma.
+      operationId: findMiembrosPorTipo
+      parameters:
+        - name: tipo
+          in: query
+          description: Tags to filter by
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Operacion exitosa
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Miembro'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Miembro'
+        '400':
+          description: El valor de tipo de tipo es invalido
+      security:
+        - petstore_auth:
+            - write:miembro
+            - read:miembro
+  /miembro/{miembroId}:
+    get:
+      tags:
+        - Miembro
+      summary: Encuentra miembro por ID
+      description: Retorna un solo miembro
+      operationId: getMiembroPorId
+      parameters:
+        - name: miembroId
+          in: path
+          description: ID del miembro a retornar
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: expand
+          in: query
+          description: Establecer el valor como True para expandir los detalles del miembro. El valor por defecto es False.
+          required: false
+          schema:
+            type: boolean
+            example: True
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Miembro'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Miembro'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: Pet not found
+      security:
+        - api_key: []
+        - petstore_auth:
+            - write:miembro
+            - read:miembro
+    post:
+      tags:
+        - Miembro
+      summary: Anadir un miembro nuevo al gimnasio
+      description: Anadir un miembro nuevo al gimnasio
+      operationId: addMiembro
+      parameters:
+        - name: miembroId
+          in: path
+          description: ID del miembro a retornar
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Anadir un miembro nuevo al gimnasio
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Miembro'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Miembro'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Miembro'
+        required: true
+      responses:
+        '200':
+          description: Operacion exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Miembro'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Miembro'
+        '400':
+          description: Entrada invalida
+        '422':
+          description: Exepcion de validacion
+      security:
+        - petstore_auth:
+            - write:miembro
+            - read:miembro
+    put:
+      tags:
+        - Miembro
+      summary: Anadir un miembro nuevo al gimnasio
+      description: Anadir un miembro nuevo al gimnasio
+      operationId: modifyMiembro
+      parameters:
+        - name: miembroId
+          in: path
+          description: ID del miembro a retornar
+          required: true
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        description: Anadir un miembro nuevo al gimnasio
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Miembro'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Miembro'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Miembro'
+        required: true
+      responses:
+        '200':
+          description: Operacion exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Miembro'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Miembro'
+        '400':
+          description: Entrada invalida
+        '422':
+          description: Exepcion de validacion
+      security:
+        - petstore_auth:
+            - write:miembro
+            - read:miembro
+    delete:
+      tags:
+        - Miembro
+      summary: Anadir un miembro nuevo al gimnasio
+      description: Anadir un miembro nuevo al gimnasio
+      operationId: deleteMiembro
+      parameters:
+        - name: miembroId
+          in: path
+          description: ID del miembro a retornar
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Operacion exitosa
+        '400':
+          description: Entrada invalida
+        '422':
+          description: Exepcion de validacion
+      security:
+        - petstore_auth:
+            - delete:miembro
+            - read:miembro
+  /miembro/{miembroId}/uploadImage:
+    post:
+      tags:
+        - pet
+      summary: uploads an image
+      description: ''
+      operationId: uploadFile
+      parameters:
+        - name: miembroId
+          in: path
+          description: ID of pet to update
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: metadatosAdicionales
+          in: query
+          description: Metadatos Adicionales
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+      security:
+        - petstore_auth:
+            - write:miemros
+            - read:miembros
+  /miembro/{miembroId}/setUsuario:
+    put:
+      tags:
+        - Miembro
+      summary: Cambia el Usuario del sistema asociado al Miembro del gimnasio
+      operationId: setUsuario
+      parameters:
+        - name: miembroId
+          in: path
+          description: ID del miembro a actualizar
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: metadatosAdicionales
+          in: query
+          description: Metadatos Adicionales
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                usuario_id:
+                  type: integer
+                  format: int8
+      responses:
+        '200':
+          description: operacion exitosa
+        '400':
+          description: datos incorrectos
+        '404':
+          description: Miembro y/o Usuario no encontrado
+
+components:
+  schemas:
+    Miembro:
+      required:
+        - id
+        - nombre
+        - apellidos
+        - estado_membresia
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        nombre:
+          type: string
+          example: 'Ken'
+        apellidos:
+          type: string
+          example: 'Solorzano Farrier'
+        estado_membresia:
+          type: integer
+          format: int64
+          example: 1
+        tipo_membresia:
+          type: integer
+          format: int64
+          example: 1
+        fecha_nacimiento:
+          type: string
+          example: '1985-07-23'
+        genero:
+          type: integer
+          format: int64
+          example: 1
+        contacto:
+          type: string
+          example: '8745-9968'
+        contacto_de_emergencia:
+          type: string
+          example: '0000-0000'
+        imagen_de_perfil:
+          type: string
+          example: 'http://127.0.0.1:8000/media/images/IMG_4159.jpg'
+        ultimo_pago:
+          type: string
+          example: '2024-05-28'
+        usuario:
+          type: integer
+          format: int32
+          example: 1
+    MiembroExt:
+      required:
+        - id
+        - nombre
+        - apellidos
+        - estado_membresia
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          example: 1
+        nombre:
+          type: string
+          example: 'Ken'
+        apellidos:
+          type: string
+          example: 'Solorzano Farrier'
+        estado_membresia:
+          type: integer
+          format: int64
+          example: 1
+        tipo_membresia:
+          type: integer
+          format: int64
+          example: 1
+        fecha_nacimiento:
+          type: string
+          example: '1985-07-23'
+        genero:
+          type: integer
+          format: int64
+          example: 1
+        contacto:
+          type: string
+          example: '8745-9968'
+        contacto_de_emergencia:
+          type: string
+          example: '0000-0000'
+        imagen_de_perfil:
+          type: string
+          example: 'http://127.0.0.1:8000/media/images/IMG_4159.jpg'
+        ultimo_pago:
+          type: string
+          example: '2024-05-28'
+        usuario:
+          type: integer
+          format: int32
+          example: 1
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+      xml:
+        name: '##default'
+  requestBodies:
+    Pet:
+      description: Pet object that needs to be added to the store
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Pet'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Pet'
+    UserArray:
+      description: List of user object
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/User'
+  securitySchemes:
+    petstore_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://petstore3.swagger.io/oauth/authorize
+          scopes:
+            write:pets: modify pets in your account
+            read:pets: read your pets
+    api_key:
+      type: apiKey
+      name: api_key
+      in: header

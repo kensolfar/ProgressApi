@@ -33,6 +33,7 @@ class MiembroEstadoSerializer(serializers.ModelSerializer):
     class Meta:
         model = MiembroEstado
         fields = [
+            'id',
             'nombre',
             'descripcion'
         ]
@@ -42,6 +43,7 @@ class MiembroTipoSerializer(serializers.ModelSerializer):
     class Meta:
         model = MiembroTipo
         fields = [
+            'id',
             'nombre',
             'descripcion'
         ]
@@ -51,6 +53,7 @@ class GeneroSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genero
         fields = [
+            'id',
             'nombre',
             'descripcion'
         ]
@@ -65,6 +68,7 @@ class MiembroExpSerializer(serializers.ModelSerializer):
     class Meta:
         model = Miembro
         fields = [
+            'id',
             'nombre',
             'apellidos',
             'estado_membresia',
@@ -84,6 +88,7 @@ class MiembroSerializer(serializers.ModelSerializer):
     class Meta:
         model = Miembro
         fields = [
+            'id',
             'nombre',
             'apellidos',
             'estado_membresia',
@@ -102,6 +107,7 @@ class InstructorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Instructor
         fields = [
+            'id',
             'nombre',
             'apellidos',
             'fecha_de_registro',
@@ -113,6 +119,7 @@ class ObjetivoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Objetivo
         fields = [
+            'id',
             'nombre',
             'descripcion'
         ]
@@ -122,6 +129,7 @@ class RutinaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rutina
         fields = [
+            'id',
             'fecha',
             'miembro',
             'instructor',
@@ -134,6 +142,7 @@ class MedicionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Medicion
         fields = [
+            'id',
             'miembro',
             'fecha_medicion',
             'rutina',
