@@ -97,12 +97,22 @@ class Rutina(models.Model):
         return self.miembro
 
 
+class UnidadDeMedida(models.Model):
+    nombre = models.CharField(max_length=50, unique=True)
+    simbolo = models.CharField(max_length=5, unique=True)
+
+
+    def __str__(self):
+        return self.simbolo
+
+
+
 class Medicion(models.Model):
     miembro = models.ForeignKey(Miembro, on_delete=models.CASCADE)
     fecha_medicion = models.DateField(auto_now_add=True)
     rutina = models.ForeignKey(Rutina, on_delete=models.SET_NULL, null=True)
     instructor = models.ForeignKey(Instructor, on_delete=models.SET_NULL, null=True)
-    #unidad = models.ForeignKey(Unidad, on_delete=models.CASCADE)
+    unidad = models.ForeignKey(UnidadDeMedida, on_delete=models.PROTECT, default=1)
     peso = models.FloatField(null=True)
     imc = models.FloatField(null=True)
     porcentaje_grasa = models.FloatField(null=True)

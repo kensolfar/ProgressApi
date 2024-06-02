@@ -8,7 +8,7 @@ from .models import (
     MiembroTipo,
     MiembroEstado,
     Genero,
-    Medicion
+    Medicion, UnidadDeMedida
 )
 
 
@@ -157,6 +157,16 @@ class RutinaSerializer(serializers.ModelSerializer):
             'instructor',
             'semanas',
             'objetivo'
+        ]
+
+
+class UnidadDeMedidaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UnidadDeMedida
+        fields = [
+            'id',
+            'nombre',
+            'simbolo'
         ]
 
 

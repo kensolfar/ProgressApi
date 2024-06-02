@@ -1,7 +1,8 @@
 from rest_framework.generics import ListAPIView
+from rest_framework.viewsets import ModelViewSet
 
-from .models import Miembro
-from .serializers import MiembroSerializer
+from .models import Miembro, UnidadDeMedida
+from .serializers import MiembroSerializer, MiembroExpSerializer, UnidadDeMedidaSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -17,7 +18,7 @@ class MiembroLista(ListAPIView):
     Lista a todos los miembros, o crea uno nuevo.
     """
     queryset = Miembro.objects.all()
-    serializer_class = MiembroSerializer
+    serializer_class = MiembroExpSerializer
     authentication_classes = [authentication.TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
@@ -62,3 +63,10 @@ class MiembroDetalle(APIView):
         miembro = self.get_miembro(id)
         miembro.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class UnidadDeMedidaView(ModelViewSet):
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = UnidadDeMedidaSerializer
+    queryset = UnidadDeMedida.objects.all()
