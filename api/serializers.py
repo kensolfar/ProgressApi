@@ -94,6 +94,28 @@ class MiembroSerializer(serializers.ModelSerializer):
             'estado_membresia',
             'tipo_membresia',
             'fecha_nacimiento',
+            'fecha_registro',
+            'genero',
+            'contacto',
+            'contacto_de_emergencia',
+            'imagen_de_perfil',
+            'ultimo_pago',
+            'usuario'
+        ]
+
+
+class FindMiembroPorEstadoSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Miembro
+        fields = [
+            'id',
+            'nombre',
+            'apellidos',
+            'estado_membresia',
+            'tipo_membresia',
+            'fecha_nacimiento',
+            'direccion',
             'genero',
             'contacto',
             'contacto_de_emergencia',

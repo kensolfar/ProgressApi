@@ -14,7 +14,7 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-  - url: http://127.0.0.1:8000/api
+  - url: http://127.0.0.1:8000/api/v1
 tags:
   - name: Miembro
     description: Operaciones para la administracion de los Miembros del gimnasio
@@ -29,16 +29,53 @@ tags:
   - name: user
     description: Operations about user
 paths:
-  /miembro/:
+  /miembro:
     get:
       tags:
         - Miembro
       summary: Obtener la informacion de todos los miembros
       description: Description Placeholder
       operationId: getMembers
+      parameters:
+        - name: nombre
+          in: query
+          description: Nombre del miembro
+          required: false
+          example: 'Ken'
+          schema:
+            type: string
+        - name: apellidos
+          in: query
+          description: Apellidos del miembro
+          required: false
+          example: 'Solorzano F'
+          schema:
+            type: string
+        - name: search
+          in: query
+          description: Busqueda por nombre o apellidos
+          required: false
+          schema:
+            type: string
+        - name: estado_membresia
+          in: query
+          description: Valores de estado a ser considerados por el filtro.
+          required: false
+          explode: true
+          example: 1
+          schema:
+            type: integer
+        - name: tipo_membresia
+          in: query
+          description: Valores de estado a ser considerados por el filtro.
+          required: false
+          explode: true
+          example: 2
+          schema:
+            type: integer
       responses:
         '200':
-          description: Successful operation
+          description: Success
           content:
             application/json:
               schema:
@@ -56,79 +93,39 @@ paths:
         - petstore_auth:
             - write:miembro
             - read:miembro
-  /miembro/findByEstado:
-    get:
+    post:
       tags:
         - Miembro
-      summary: Encuentra miembros por su estatus
-      description: Multiples valores de estados pueden ser proporcionados separados por comas
-      operationId: findMiembroPorEstado
-      parameters:
-        - name: estado
-          in: query
-          description: Valores de estado a ser considerados por el filtro.
-          required: false
-          explode: true
-          schema:
-            type: string
-            default: activo
-            enum:
-              - activo
-              - nuevo
-              - inactivo
+      summary: Anadir un miembro nuevo al gimnasio
+      description: Anadir un miembro nuevo al gimnasio
+      operationId: addMiembro
+      requestBody:
+        description: Anadir un miembro nuevo al gimnasio
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Miembro'
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/Miembro'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Miembro'
+        required: true
       responses:
         '200':
           description: Operacion exitosa
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Miembro'
+                $ref: '#/components/schemas/Miembro'
             application/xml:
               schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Miembro'
+                $ref: '#/components/schemas/Miembro'
         '400':
-          description: Invalid status value
-      security:
-        - petstore_auth:
-            - write:miembro
-            - read:miembro
-  /miembro/findByTipo:
-    get:
-      tags:
-        - pet
-      summary: Encuenta los miembros por tipo
-      description: Multipes tipos pueden ser agredados separados por coma.
-      operationId: findMiembrosPorTipo
-      parameters:
-        - name: tipo
-          in: query
-          description: Tags to filter by
-          required: false
-          explode: true
-          schema:
-            type: array
-            items:
-              type: string
-      responses:
-        '200':
-          description: Operacion exitosa
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Miembro'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Miembro'
-        '400':
-          description: El valor de tipo de tipo es invalido
+          description: Entrada invalida
+        '422':
+          description: Exepcion de validacion
       security:
         - petstore_auth:
             - write:miembro
@@ -171,51 +168,6 @@ paths:
           description: Pet not found
       security:
         - api_key: []
-        - petstore_auth:
-            - write:miembro
-            - read:miembro
-    post:
-      tags:
-        - Miembro
-      summary: Anadir un miembro nuevo al gimnasio
-      description: Anadir un miembro nuevo al gimnasio
-      operationId: addMiembro
-      parameters:
-        - name: miembroId
-          in: path
-          description: ID del miembro a retornar
-          required: true
-          schema:
-            type: integer
-            format: int64
-      requestBody:
-        description: Anadir un miembro nuevo al gimnasio
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Miembro'
-          application/xml:
-            schema:
-              $ref: '#/components/schemas/Miembro'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Miembro'
-        required: true
-      responses:
-        '200':
-          description: Operacion exitosa
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Miembro'
-            application/xml:
-              schema:
-                $ref: '#/components/schemas/Miembro'
-        '400':
-          description: Entrada invalida
-        '422':
-          description: Exepcion de validacion
-      security:
         - petstore_auth:
             - write:miembro
             - read:miembro
@@ -292,7 +244,7 @@ paths:
   /miembro/{miembroId}/uploadImage:
     post:
       tags:
-        - pet
+        - Miembro
       summary: uploads an image
       description: ''
       operationId: uploadFile
@@ -477,15 +429,15 @@ components:
       xml:
         name: '##default'
   requestBodies:
-    Pet:
+    Miembro:
       description: Pet object that needs to be added to the store
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/Pet'
+            $ref: '#/components/schemas/Miembro'
         application/xml:
           schema:
-            $ref: '#/components/schemas/Pet'
+            $ref: '#/components/schemas/Miembro'
     UserArray:
       description: List of user object
       content:
