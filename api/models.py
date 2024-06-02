@@ -30,11 +30,12 @@ class Genero(models.Model):
 class Miembro(models.Model):
     nombre = models.CharField(max_length=255)
     apellidos = models.CharField(max_length=255)
-    estado_membresia = models.ForeignKey(MiembroEstado, related_name='estado_membresia', on_delete=models.SET_NULL, null=True)
-    tipo_membresia = models.ForeignKey(MiembroTipo, related_name='tipo_membresia', on_delete=models.SET_NULL, null=True)
-    fecha_nacimiento = models.DateField(null=True, blank=True)
+    estado_membresia = models.ForeignKey(MiembroEstado, related_name='estado_membresia', default=1, on_delete=models.RESTRICT)
+    tipo_membresia = models.ForeignKey(MiembroTipo, related_name='tipo_membresia', on_delete=models.RESTRICT, default=1)
+    direccion = models.CharField(max_length=255, null=True, blank=True)
+    fecha_nacimiento = models.DateField(null=True)
     fecha_registro = models.DateField(auto_now_add=True)
-    genero = models.ForeignKey(Genero, related_name='genero', on_delete=models.PROTECT, null=True)
+    genero = models.ForeignKey(Genero, related_name='genero', on_delete=models.RESTRICT, null=True)
     contacto = models.CharField(max_length=15, null=True, blank=True)
     contacto_de_emergencia = models.CharField(max_length=15, null=True, blank=True)
     imagen_de_perfil = models.ImageField(upload_to='images/', null=True, blank=True)
@@ -48,6 +49,7 @@ class Miembro(models.Model):
         indexes = [
             models.Index(fields=["apellidos", "nombre"]),
             models.Index(fields=["nombre"]),
+            models.Index(fields=['estado_membresia'])
         ]
 
 
@@ -100,11 +102,13 @@ class Medicion(models.Model):
     fecha_medicion = models.DateField(auto_now_add=True)
     rutina = models.ForeignKey(Rutina, on_delete=models.SET_NULL, null=True)
     instructor = models.ForeignKey(Instructor, on_delete=models.SET_NULL, null=True)
+    #unidad = models.ForeignKey(Unidad, on_delete=models.CASCADE)
     peso = models.FloatField(null=True)
     imc = models.FloatField(null=True)
     porcentaje_grasa = models.FloatField(null=True)
     estatura = models.FloatField(null=True)
     pecho = models.FloatField(null=True)
+    espalda = models.FloatField(null=True)
     cintura = models.FloatField(null=True)
     brazo_izquierdo = models.FloatField(null=True)
     brazo_derecho = models.FloatField(null=True)
