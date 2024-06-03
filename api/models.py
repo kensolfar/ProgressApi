@@ -94,7 +94,7 @@ class Rutina(models.Model):
         unique_together = (('fecha', 'miembro', 'instructor'),)
 
     def __str__(self):
-        return self.miembro
+        return str(self.fecha)
 
 
 class UnidadDeMedida(models.Model):
@@ -103,32 +103,30 @@ class UnidadDeMedida(models.Model):
 
 
     def __str__(self):
-        return self.simbolo
-
+        return str(self.simbolo)
 
 
 class Medicion(models.Model):
     miembro = models.ForeignKey(Miembro, on_delete=models.CASCADE)
     fecha_medicion = models.DateField(auto_now_add=True)
-    rutina = models.ForeignKey(Rutina, on_delete=models.SET_NULL, null=True)
     instructor = models.ForeignKey(Instructor, on_delete=models.SET_NULL, null=True)
     unidad = models.ForeignKey(UnidadDeMedida, on_delete=models.PROTECT, default=1)
-    peso = models.FloatField(null=True)
-    imc = models.FloatField(null=True)
-    porcentaje_grasa = models.FloatField(null=True)
-    estatura = models.FloatField(null=True)
-    pecho = models.FloatField(null=True)
-    espalda = models.FloatField(null=True)
-    cintura = models.FloatField(null=True)
-    brazo_izquierdo = models.FloatField(null=True)
-    brazo_derecho = models.FloatField(null=True)
-    pierna_izquierda = models.FloatField(null=True)
-    pierna_derecha = models.FloatField(null=True)
-    pantorrilla_izquierda = models.FloatField(null=True)
-    pantorrilla_derecha = models.FloatField(null=True)
+    peso = models.FloatField(null=True, blank=True)
+    imc = models.FloatField(null=True, blank=True)
+    porcentaje_grasa = models.FloatField(null=True, blank=True)
+    estatura = models.FloatField(null=True, blank=True)
+    pecho = models.FloatField(null=True, blank=True)
+    espalda = models.FloatField(null=True, blank=True)
+    cintura = models.FloatField(null=True, blank=True)
+    brazo_izquierdo = models.FloatField(null=True, blank=True)
+    brazo_derecho = models.FloatField(null=True, blank=True)
+    pierna_izquierda = models.FloatField(null=True, blank=True)
+    pierna_derecha = models.FloatField(null=True, blank=True)
+    pantorrilla_izquierda = models.FloatField(null=True, blank=True)
+    pantorrilla_derecha = models.FloatField(null=True, blank=True)
 
     def __str__(self):
-        return self.miembro
+        return f'{self.miembro} - {self.fecha_medicion}'
 
     class Meta:
         index_together = ('miembro', 'fecha_medicion')

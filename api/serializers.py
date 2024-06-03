@@ -177,7 +177,6 @@ class MedicionSerializer(serializers.ModelSerializer):
             'id',
             'miembro',
             'fecha_medicion',
-            'rutina',
             'instructor',
             'peso',
             'imc',
@@ -191,4 +190,32 @@ class MedicionSerializer(serializers.ModelSerializer):
             'pierna_derecha',
             'pantorrilla_izquierda',
             'pantorrilla_derecha'
+        ]
+
+
+class RutinaDetalleSerializer(serializers.ModelSerializer):
+    miembro = MiembroSerializer(many=False)
+    instructor = InstructorSerializer(many=False)
+    objetivo = ObjetivoSerializer(many=False)
+    class Meta:
+        model = Rutina
+        fields = [
+            'fecha',
+            'miembro',
+            'instructor',
+            'semanas',
+            'objetivo'
+        ]
+
+
+class RutinaSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Rutina
+        fields = [
+            'fecha',
+            'miembro',
+            'instructor',
+            'semanas',
+            'objetivo'
         ]

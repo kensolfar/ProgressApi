@@ -6,10 +6,12 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register('unidad', viewset=views.UnidadDeMedidaView)
+router.register('rutina', viewset=views.RutinaView)
 
 urlpatterns = [
     path('', include(router.urls)),
     path('miembro', views.MiembroLista.as_view()),
     path('miembro/<int:id>', views.MiembroDetalle.as_view()),
-    path('miembro/<int:id>', views.MiembroDetalle.as_view()),
+    path('medicion', views.MedicionView.as_view()),
+    path('medicion/<int:id>', views.MedicionDetalle.as_view()),
 ]
