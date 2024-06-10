@@ -77,26 +77,6 @@ class Objetivo(models.Model):
         return self.nombre
 
 
-class Rutina(models.Model):
-    fecha = models.DateField(auto_now_add=True)
-    miembro = models.ForeignKey(Miembro, on_delete=models.CASCADE, related_name='miembro')
-    instructor = models.ForeignKey(Instructor, on_delete=models.RESTRICT, related_name='instructor')
-    semanas = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)], default=6)
-    objetivo = models.ForeignKey(Objetivo, on_delete=models.SET_NULL, null=True, related_name='objetivo')
-
-    class Meta:
-        indexes = [
-            models.Index(fields=["fecha", "miembro"]),
-            models.Index(fields=["miembro"]),
-            models.Index(fields=["fecha"]),
-            models.Index(fields=["instructor"]),
-        ]
-        unique_together = (('fecha', 'miembro', 'instructor'),)
-
-    def __str__(self):
-        return str(self.fecha)
-
-
 class UnidadDeMedida(models.Model):
     nombre = models.CharField(max_length=50, unique=True)
     simbolo = models.CharField(max_length=5, unique=True)
@@ -130,3 +110,144 @@ class Medicion(models.Model):
 
     class Meta:
         index_together = ('miembro', 'fecha_medicion')
+
+
+class Ejercicio(models.Model):
+    nombre = models.CharField(max_length=255)
+    ejecucion = models.CharField(max_length=1000, null=True, blank=True)
+    comentarios = models.CharField(max_length=1000, null=True, blank=True)
+    errores_frecuentes = models.CharField(max_length=1000, null=True, blank=True)
+    imagen = models.ImageField(upload_to='ejercicios/', null=True, blank=True)
+
+    def __str__(self):
+        return str(self.nombre)
+
+
+class Repeticion(models.Model):
+    nombre = models.CharField(max_length=255)
+    descripcion = models.CharField(max_length=255, null=True)
+
+    def __str__(self):
+        return str(self.nombre)
+
+
+class Rutina(models.Model):
+    fecha = models.DateField(auto_now_add=True)
+    miembro = models.ForeignKey(Miembro, on_delete=models.CASCADE, related_name='miembro')
+    instructor = models.ForeignKey(Instructor, on_delete=models.RESTRICT, related_name='instructor')
+    semanas = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(10)], default=6)
+    duracion = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(7)], default=5)
+    objetivo = models.ForeignKey(Objetivo, on_delete=models.SET_NULL, null=True, related_name='objetivo')
+    activa = models.BooleanField(default=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["fecha", "miembro"]),
+            models.Index(fields=["miembro"]),
+            models.Index(fields=["fecha"]),
+            models.Index(fields=["instructor"]),
+        ]
+        unique_together = (('fecha', 'miembro', 'instructor'),)
+
+    def __str__(self):
+        return str(f'{self.fecha} - {self.miembro}')
+
+
+class DiaDeRutina(models.Model):
+    rutina = models.ForeignKey(Rutina, on_delete=models.CASCADE, related_name='dias_de_rutina')
+    descripcion = models.CharField(max_length=255)
+
+    def __str__(self):
+        return '%s - %s' % (self.rutina, self.descripcion)
+
+
+class EjerciciosPorDia(models.Model):
+    dia_de_rutina = models.ForeignKey(DiaDeRutina, on_delete=models.CASCADE, related_name='ejercicios')
+    ejercicio = models.ForeignKey(Ejercicio, on_delete=models.CASCADE)
+    repeticion = models.ForeignKey(Repeticion, on_delete=models.PROTECT)
+
+    class Meta:
+        unique_together = ['dia_de_rutina', 'ejercicio']
+
+
+class GrupoMuscular(models.Model):
+    nombre = models.CharField(max_length=255)
+    comentario = models.CharField(max_length=1000, null=True, blank=True)
+
+    def __str__(self):
+        return str(self.nombre)
+
+
+class Instrumento(models.Model):
+    nombre = models.CharField(max_length=255)
+    descripcion = models.CharField(max_length=255, null=True, blank=True)
+    imagen = models.ImageField(upload_to='instrumentos/', null=True, blank=True)
+
+    def __str__(self):
+        return str(self.nombre)
+
+
+class Recurso(models.Model):
+    nombre = models.CharField(max_length=255)
+    descripcion = models.CharField(max_length=255, null=True)
+    url = models.CharField(max_length=255, null=True)
+
+    def __str__(self):
+        return str(self.nombre)
+
+
+class Musculo(models.Model):
+    nombre = models.CharField(max_length=255)
+    origen = models.CharField(max_length=255, null=True, blank=True)
+    insercion = models.CharField(max_length=255, null=True, blank=True)
+    funciones_principales = models.CharField(max_length=255, null=True, blank=True)
+    grupo_muscular = models.ForeignKey(GrupoMuscular, on_delete=models.CASCADE)
+    imagen = models.ImageField(upload_to='musculos/', null=True, blank=True)
+
+    def __str__(self):
+        return '%s: %s' % (self.grupo_muscular, self.nombre)
+
+
+class MusculosDeEjercicio(models.Model):
+    ejercicio = models.ForeignKey(Ejercicio, on_delete=models.CASCADE, related_name='musculos')
+    musculo = models.ForeignKey(Musculo, on_delete=models.CASCADE, related_name='ejercicio')
+
+    class Meta:
+        unique_together = ['ejercicio', 'musculo']
+
+    def __str__(self):
+        return '%s' % self.musculo
+
+
+class InstrumentosDeEjercicio(models.Model):
+    ejercicio = models.ForeignKey(Ejercicio, on_delete=models.CASCADE, related_name='instrumentos')
+    instrumento = models.ForeignKey(Instrumento, on_delete=models.CASCADE, related_name='ejercicio')
+
+    class Meta:
+        unique_together = ['ejercicio', 'instrumento']
+
+    def __str__(self):
+        return '%s' % self.instrumento
+
+
+class RecursosDeEjercicio(models.Model):
+    ejercicio = models.ForeignKey(Ejercicio, on_delete=models.CASCADE, related_name='recursos')
+    recurso = models.ForeignKey(Recurso, on_delete=models.CASCADE, related_name='ejercicio')
+
+    class Meta:
+        unique_together = ['ejercicio', 'recurso']
+
+    def __str__(self):
+        return '%s' % self.recurso
+
+
+class MusculosPorDia(models.Model):
+    dia_de_rutina = models.ForeignKey(DiaDeRutina, on_delete=models.CASCADE, related_name='grupos_musculares')
+    grupo_muscular = models.ForeignKey(GrupoMuscular, on_delete=models.CASCADE, related_name='dia')
+
+    class Meta:
+        unique_together = ['dia_de_rutina', 'grupo_muscular']
+
+    def __str__(self):
+        return '%s' % self.grupo_muscular
+
