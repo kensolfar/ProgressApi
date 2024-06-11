@@ -11,6 +11,7 @@ urlpatterns = [
     path('', include(router.urls)),
     path('miembro', views.MiembroLista.as_view()),
     path('miembro/<int:id>', views.MiembroDetalle.as_view()),
+    path('miembros', views.MiembroListaMinView.as_view()),
     path('medicion', views.MedicionView.as_view()),
     path('medicion/<int:id>', views.MedicionDetalle.as_view()),
     path('rutina', views.RutinaView.as_view()),

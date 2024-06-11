@@ -3,7 +3,7 @@ from rest_framework.viewsets import ModelViewSet
 
 from .models import Miembro, UnidadDeMedida, Medicion, Rutina
 from .serializers import MiembroSerializer, MiembroExpSerializer, UnidadDeMedidaSerializer, MedicionSerializer, \
-    RutinaDetalleSerializer, RutinaSerializer
+    RutinaDetalleSerializer, RutinaSerializer, MiembroMinSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -32,6 +32,17 @@ class MiembroLista(ListAPIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class MiembroListaMinView(ListAPIView):
+
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = Miembro.objects.all()
+    serializer_class = MiembroMinSerializer
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filterset_fields = ['nombre', 'apellidos', 'estado_membresia', 'tipo_membresia']
+    search_fields = ['nombre', 'apellidos']
 
 
 class MiembroDetalle(APIView):

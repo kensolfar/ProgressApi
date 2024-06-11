@@ -105,6 +105,19 @@ class MiembroSerializer(serializers.ModelSerializer):
         ]
 
 
+class MiembroMinSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Miembro
+        fields = [
+            'id',
+            'nombre',
+            'apellidos',
+            'estado_membresia',
+            'tipo_membresia'
+        ]
+
+
 class InstructorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Instructor

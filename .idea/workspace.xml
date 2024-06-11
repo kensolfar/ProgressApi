@@ -5,53 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ffa6abd-b6bf-4437-9134-c7a077d23ab8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/api/migrations/0018_ejercicio_grupomuscular_instrumento_recurso_and_more.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/migrations/0019_remove_instrumento_url_instrumento_imagen_and_more.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/migrations/0020_alter_instrumento_imagen_musculo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/migrations/0021_remove_musculo_descripcion.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/migrations/0022_rename_musculo_musculos.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/migrations/0023_musculo_delete_musculos.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/migrations/0024_musculo_funciones_principales_musculo_insercion_and_more.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/migrations/0025_remove_grupomuscular_descripcion_and_more.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/migrations/0026_remove_ejercicio_descripcion_and_more.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/migrations/0027_ejercicio_imagen.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/migrations/0028_alter_ejercicio_comentarios_and_more.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/migrations/0029_rename_grupo_muscular_musculosdeejercicio_musculo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/migrations/0030_alter_musculosdeejercicio_musculo.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/migrations/0031_rename_errores_frequentes_ejercicio_errores_frecuentes_and_more.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/ejercicios/Screenshot_2024-06-08_220513.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/ejercicios/Screenshot_2024-06-08_223342.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/ejercicios/Screenshot_2024-06-09_092452.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/ejercicios/Screenshot_2024-06-09_093053.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/ejercicios/Screenshot_2024-06-09_093142.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/images/PFID125X-banco-multiple-BODY-SOLID-CICADEX-FITNESS.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_210153.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_210153_BXDrZXo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_210153_M8oodgZ.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_210153_iIylmOw.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_210153_nyehjOQ.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_210652.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_210652_780xOQt.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_210652_NslxPAM.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_210652_T7vR8tT.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_210652_YhBbK2w.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_210652_iiNgtAH.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_210652_jJwyFdv.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_210652_n3cb0Q1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_210652_w0XPlDu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_212256.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_213208.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_213208_aZQtE3N.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_213208_nGIaLuW.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_213517.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/media/musculos/Screenshot_2024-06-08_213517_qsjVN0c.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/progress/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/progress/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +58,7 @@
       <recent name="C:\github\ProgressApi\api\miembro" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.migrate">
+  <component name="RunManager" selected="Python.runserver ">
     <configuration name="makemigrations" type="PythonConfigurationType" factoryName="Python">
       <module name="ProgressApi" />
       <option name="ENV_FILES" value="" />
