@@ -6,6 +6,8 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register('unidad', viewset=views.UnidadDeMedidaView)
+router.register('tipomiembro', viewset=views.TipoMiembroView)
+router.register('estadomiembro', viewset=views.EstadoMiembroView)
 
 urlpatterns = [
     path('', include(router.urls)),

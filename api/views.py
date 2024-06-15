@@ -1,9 +1,9 @@
 from rest_framework.generics import ListAPIView
 from rest_framework.viewsets import ModelViewSet
 
-from .models import Miembro, UnidadDeMedida, Medicion, Rutina
+from .models import Miembro, UnidadDeMedida, Medicion, Rutina, MiembroTipo, MiembroEstado
 from .serializers import MiembroSerializer, MiembroExpSerializer, UnidadDeMedidaSerializer, MedicionSerializer, \
-    RutinaDetalleSerializer, RutinaSerializer, MiembroMinSerializer
+    RutinaDetalleSerializer, RutinaSerializer, MiembroMinSerializer, MiembroTipoSerializer, MiembroEstadoSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -84,6 +84,22 @@ class UnidadDeMedidaView(ModelViewSet):
     queryset = UnidadDeMedida.objects.all()
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['nombre', 'simbolo']
+
+
+class TipoMiembroView(ModelViewSet):
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = MiembroTipoSerializer
+    queryset = MiembroTipo.objects.all()
+    filter_backends = [DjangoFilterBackend]
+
+
+class EstadoMiembroView(ModelViewSet):
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = MiembroEstadoSerializer
+    queryset = MiembroEstado.objects.all()
+    filter_backends = [DjangoFilterBackend]
 
 
 class MedicionView(ListAPIView):
