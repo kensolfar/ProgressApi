@@ -89,6 +89,13 @@ WSGI_APPLICATION = 'progress.wsgi.application'
 
 DATABASES = {
     "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "mydatabase",
+    }
+}
+
+"""DATABASES = {
+    "default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "progress",
         "USER": "root",
@@ -97,7 +104,7 @@ DATABASES = {
         "PORT": "3306",
         "DATE_FORMAT": "%d %B, %Y"
     }
-}
+}"""
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
