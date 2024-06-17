@@ -60,7 +60,7 @@ class GeneroSerializer(serializers.ModelSerializer):
         ]
 
 
-class MiembroExpSerializer(serializers.ModelSerializer):
+class MiembroSerializer(serializers.ModelSerializer):
     estado_membresia = serializers.StringRelatedField(many=False)
     tipo_membresia = serializers.StringRelatedField(many=False)
     genero = serializers.StringRelatedField(many=False)
@@ -72,30 +72,10 @@ class MiembroExpSerializer(serializers.ModelSerializer):
             'id',
             'nombre',
             'apellidos',
+            'direccion',
             'estado_membresia',
             'tipo_membresia',
             'fecha_nacimiento',
-            'genero',
-            'contacto',
-            'contacto_de_emergencia',
-            'imagen_de_perfil',
-            'ultimo_pago',
-            'usuario'
-        ]
-
-
-class MiembroSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Miembro
-        fields = [
-            'id',
-            'nombre',
-            'apellidos',
-            'estado_membresia',
-            'tipo_membresia',
-            'fecha_nacimiento',
-            'fecha_registro',
             'genero',
             'contacto',
             'contacto_de_emergencia',
