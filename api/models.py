@@ -5,7 +5,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 class MiembroEstado(models.Model):
     nombre = models.CharField(max_length=50, null=False)
-    descripcion = models.CharField(max_length=50)
+    descripcion = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return self.nombre
@@ -13,7 +13,7 @@ class MiembroEstado(models.Model):
 
 class MiembroTipo(models.Model):
     nombre = models.CharField(max_length=50, null=False)
-    descripcion = models.CharField(max_length=50)
+    descripcion = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return self.nombre
@@ -21,7 +21,7 @@ class MiembroTipo(models.Model):
 
 class Genero(models.Model):
     nombre = models.CharField(max_length=50)
-    descripcion = models.CharField(max_length=50)
+    descripcion = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return self.nombre
@@ -125,7 +125,7 @@ class Ejercicio(models.Model):
 
 class Repeticion(models.Model):
     nombre = models.CharField(max_length=255)
-    descripcion = models.CharField(max_length=255, null=True)
+    descripcion = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return str(self.nombre)
@@ -155,7 +155,7 @@ class Rutina(models.Model):
 
 class DiaDeRutina(models.Model):
     rutina = models.ForeignKey(Rutina, on_delete=models.CASCADE, related_name='dias_de_rutina')
-    descripcion = models.CharField(max_length=255)
+    descripcion = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return '%s - %s' % (self.rutina, self.descripcion)
@@ -189,7 +189,7 @@ class Instrumento(models.Model):
 
 class Recurso(models.Model):
     nombre = models.CharField(max_length=255)
-    descripcion = models.CharField(max_length=255, null=True)
+    descripcion = models.CharField(max_length=255, null=True, blank=True)
     url = models.CharField(max_length=255, null=True)
 
     def __str__(self):
