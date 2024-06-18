@@ -1,7 +1,7 @@
 from rest_framework.generics import ListAPIView
 from rest_framework.viewsets import ModelViewSet
 
-from .models import Miembro, UnidadDeMedida, Medicion, Rutina, MiembroTipo, MiembroEstado
+from .models import Miembro, UnidadDeMedida, Medicion, Rutina, MiembroTipo, MiembroEstado, Genero
 from .serializers import MiembroSerializer, UnidadDeMedidaSerializer, MedicionSerializer, \
     RutinaDetalleSerializer, RutinaSerializer, MiembroMinSerializer, MiembroTipoSerializer, MiembroEstadoSerializer
 from django.http import Http404
@@ -101,6 +101,13 @@ class EstadoMiembroView(ModelViewSet):
     queryset = MiembroEstado.objects.all()
     filter_backends = [DjangoFilterBackend]
 
+
+class GeneroView(ModelViewSet):
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = MiembroEstadoSerializer
+    queryset = Genero.objects.all()
+    filter_backends = [DjangoFilterBackend]
 
 class MedicionView(ListAPIView):
     authentication_classes = [authentication.TokenAuthentication]

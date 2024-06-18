@@ -8,6 +8,7 @@ router = routers.DefaultRouter()
 router.register('unidad', viewset=views.UnidadDeMedidaView)
 router.register('tipomiembro', viewset=views.TipoMiembroView)
 router.register('estadomiembro', viewset=views.EstadoMiembroView)
+router.register('genero', viewset=views.GeneroView)
 
 urlpatterns = [
     path('', include(router.urls)),

@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ffa6abd-b6bf-4437-9134-c7a077d23ab8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/api/migrations/0033_alter_diaderutina_descripcion_and_more.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/progressdb" beforeDir="false" afterPath="$PROJECT_DIR$/progressdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +45,7 @@
     "Python.runserver .executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "F000",
+    "git-widget-placeholder": "F000-nuevo-miembro",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "/Users/crksf/Documents/GitHub/ProgressApi",
     "settings.editor.selected.configurable": "build.tools"
