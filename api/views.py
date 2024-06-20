@@ -3,7 +3,8 @@ from rest_framework.viewsets import ModelViewSet
 
 from .models import Miembro, UnidadDeMedida, Medicion, Rutina, MiembroTipo, MiembroEstado, Genero
 from .serializers import MiembroSerializer, UnidadDeMedidaSerializer, MedicionSerializer, \
-    RutinaDetalleSerializer, RutinaSerializer, MiembroMinSerializer, MiembroTipoSerializer, MiembroEstadoSerializer
+    RutinaDetalleSerializer, RutinaSerializer, MiembroMinSerializer, MiembroTipoSerializer, MiembroEstadoSerializer, \
+    MiembroDetalleSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -59,9 +60,13 @@ class MiembroDetalle(APIView):
             raise Http404
 
     def get(self, request, id, format=None):
+        expand = self.request.query_params.get('expand')
         miembro = self.get_miembro(id)
         serializer = MiembroSerializer(miembro)
+        if expand == 'details':
+            serializer = MiembroDetalleSerializer(miembro)
         return Response(serializer.data)
+        #return Response(expand)
 
     def put(self, request, id, format=None):
         miembro = self.get_miembro(id)
