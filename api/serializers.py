@@ -108,6 +108,7 @@ class MiembroMinSerializer(serializers.ModelSerializer):
 
     estado_membresia = serializers.StringRelatedField(many=False)
     tipo_membresia = serializers.StringRelatedField(many=False)
+    usuario = UserSerializer(many=False, read_only=True)
     class Meta:
         model = Miembro
 
@@ -118,7 +119,8 @@ class MiembroMinSerializer(serializers.ModelSerializer):
             'estado_membresia',
             'tipo_membresia',
             'direccion',
-            'ultimo_pago'
+            'ultimo_pago',
+            'usuario'
         ]
 
 
