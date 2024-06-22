@@ -120,7 +120,8 @@ class MiembroMinSerializer(serializers.ModelSerializer):
             'tipo_membresia',
             'direccion',
             'ultimo_pago',
-            'usuario'
+            'usuario',
+            'imagen_de_perfil'
         ]
 
 
