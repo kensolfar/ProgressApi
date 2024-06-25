@@ -1,10 +1,10 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, UpdateAPIView
 from rest_framework.viewsets import ModelViewSet
 
 from .models import Miembro, UnidadDeMedida, Medicion, Rutina, MiembroTipo, MiembroEstado, Genero
 from .serializers import MiembroSerializer, UnidadDeMedidaSerializer, MedicionSerializer, \
     RutinaDetalleSerializer, RutinaSerializer, MiembroMinSerializer, MiembroTipoSerializer, MiembroEstadoSerializer, \
-    MiembroDetalleSerializer
+    MiembroDetalleSerializer, MiembroImageSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -80,6 +80,30 @@ class MiembroDetalle(APIView):
         miembro = self.get_miembro(id)
         miembro.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class MiembroImageView(UpdateAPIView):
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_miembro(self, id):
+        try:
+            return Miembro.objects.get(id=id)
+        except Miembro.DoesNotExist:
+            raise Http404
+
+    def put(self, request, id, format=None):
+        miembro = self.get_miembro(id)
+        serializer = MiembroImageSerializer(miembro, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self, request, id, format=None):
+        miembro = self.get_miembro(id)
+        serializer = MiembroImageSerializer(miembro)
+        return Response(serializer.data)
 
 
 class UnidadDeMedidaView(ModelViewSet):

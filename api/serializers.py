@@ -125,6 +125,15 @@ class MiembroMinSerializer(serializers.ModelSerializer):
         ]
 
 
+class MiembroImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Miembro
+
+        fields = [
+            'imagen_de_perfil'
+        ]
+
+
 class InstructorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Instructor
