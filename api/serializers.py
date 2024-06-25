@@ -60,7 +60,7 @@ class GeneroSerializer(serializers.ModelSerializer):
         ]
 
 
-class MiembroSerializer(serializers.ModelSerializer):
+class MiembroDetalleSerializer(serializers.ModelSerializer):
     estado_membresia = serializers.StringRelatedField(many=False)
     tipo_membresia = serializers.StringRelatedField(many=False)
     genero = serializers.StringRelatedField(many=False)
@@ -85,16 +85,52 @@ class MiembroSerializer(serializers.ModelSerializer):
         ]
 
 
-class MiembroMinSerializer(serializers.ModelSerializer):
-
+class MiembroSerializer(serializers.ModelSerializer):
     class Meta:
         model = Miembro
         fields = [
             'id',
             'nombre',
             'apellidos',
+            'direccion',
             'estado_membresia',
-            'tipo_membresia'
+            'tipo_membresia',
+            'fecha_nacimiento',
+            'genero',
+            'contacto',
+            'contacto_de_emergencia',
+            'imagen_de_perfil',
+            'ultimo_pago',
+            'usuario'
+        ]
+
+class MiembroMinSerializer(serializers.ModelSerializer):
+
+    estado_membresia = serializers.StringRelatedField(many=False)
+    tipo_membresia = serializers.StringRelatedField(many=False)
+    usuario = UserSerializer(many=False, read_only=True)
+    class Meta:
+        model = Miembro
+
+        fields = [
+            'id',
+            'nombre',
+            'apellidos',
+            'estado_membresia',
+            'tipo_membresia',
+            'direccion',
+            'ultimo_pago',
+            'usuario',
+            'imagen_de_perfil'
+        ]
+
+
+class MiembroImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Miembro
+
+        fields = [
+            'imagen_de_perfil'
         ]
 
 

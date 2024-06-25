@@ -8,11 +8,13 @@ router = routers.DefaultRouter()
 router.register('unidad', viewset=views.UnidadDeMedidaView)
 router.register('tipomiembro', viewset=views.TipoMiembroView)
 router.register('estadomiembro', viewset=views.EstadoMiembroView)
+router.register('genero', viewset=views.GeneroView)
 
 urlpatterns = [
     path('', include(router.urls)),
     path('miembro', views.MiembroLista.as_view()),
     path('miembro/<int:id>', views.MiembroDetalle.as_view()),
+    path('miembro/<int:id>/image', views.MiembroImageView.as_view()),
     path('miembros', views.MiembroListaMinView.as_view()),
     path('medicion', views.MedicionView.as_view()),
     path('medicion/<int:id>', views.MedicionDetalle.as_view()),
