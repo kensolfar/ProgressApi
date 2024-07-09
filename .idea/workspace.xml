@@ -5,7 +5,58 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ffa6abd-b6bf-4437-9134-c7a077d23ab8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/api/migrations/0034_miembro_anotaciones.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/migrations/0035_canton_distrito_provincia_alter_miembro_anotaciones.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/migrations/0036_alter_miembro_anotaciones.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api/migrations/0037_asistencia.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-01-22_at_09.33.41.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-01-22_at_10.03.02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-01-22_at_10.08.49.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-03-07_at_09.29.58.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-04-11_at_11.22.05.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-04-11_at_11.22.05_UCDfs9s.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-04-11_at_11.22.05_Y2IMQ0y.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-04-11_at_11.22.05_ffCePYN.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-04-11_at_11.22.05_oNUOJwt.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-04-11_at_11.47.08.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-04-11_at_11.47.08_JZQF1HK.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-04-11_at_11.47.08_UpL4gks.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-04-11_at_11.47.08_ZeXNjTu.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-04-11_at_11.47.08_pCu3WX6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-04-11_at_12.02.21.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-04-11_at_12.02.21_A2rvdTl.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-04-11_at_12.02.21_IlF6CIa.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-04-11_at_12.02.21_Rrwm1hs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-04-11_at_12.02.21_WAWe42g.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-04-11_at_12.02.21_rVafAFG.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-04-11_at_12.02.21_uyonuNK.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-05-17_at_8.16.24AM.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-12_at_7.09.36AM.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-12_at_7.09.36AM_5mSUZBW.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-12_at_7.09.36AM_Atxe8nC.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-12_at_7.09.36AM_ZztbBqG.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-12_at_7.09.36AM_z0PEatD.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-12_at_7.09.49AM.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-12_at_7.09.49AM_7mEeWZg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-12_at_7.09.49AM_SQMfqm2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-12_at_7.09.49AM_bVvpsWv.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-12_at_7.09.49AM_cUmrWGs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-12_at_7.09.49AM_cUum9lM.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-12_at_7.09.49AM_ltNzl5T.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-12_at_7.09.49AM_uQO3Cbs.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-13_at_1.21.02PM_CoddwRm.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-13_at_1.21.02PM_CpKceT6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-13_at_1.21.02PM_pnwwycr.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-13_at_1.21.02PM_r5kam0g.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-13_at_1.21.21PM.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-13_at_1.21.21PM_2UbKdS2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-13_at_1.21.21PM_6bfiFUJ.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-13_at_1.21.21PM_Be7nwTz.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-13_at_1.21.21PM_n5Ra4tD.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-13_at_1.21.21PM_rENl8cR.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/media/images/Screenshot_2024-06-13_at_1.21.37PM.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/serializers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/views.py" afterDir="false" />
@@ -59,7 +110,7 @@
       <recent name="C:\github\ProgressApi\api\miembro" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.runserver ">
+  <component name="RunManager" selected="Python.migrate">
     <configuration name="makemigrations" type="PythonConfigurationType" factoryName="Python">
       <module name="ProgressApi" />
       <option name="ENV_FILES" value="" />
