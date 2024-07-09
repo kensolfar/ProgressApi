@@ -9,7 +9,7 @@ from .models import (
     MiembroEstado,
     Genero,
     Medicion, UnidadDeMedida, DiaDeRutina, EjerciciosPorDia, InstrumentosDeEjercicio, Instrumento, Ejercicio,
-    MusculosDeEjercicio, Musculo
+    MusculosDeEjercicio, Musculo, Asistencia
 )
 
 
@@ -101,13 +101,15 @@ class MiembroSerializer(serializers.ModelSerializer):
             'contacto_de_emergencia',
             'imagen_de_perfil',
             'ultimo_pago',
-            'usuario'
+            'usuario',
+            'anotaciones'
         ]
 
 class MiembroMinSerializer(serializers.ModelSerializer):
 
-    estado_membresia = serializers.StringRelatedField(many=False)
-    tipo_membresia = serializers.StringRelatedField(many=False)
+    estado_membresia = MiembroEstadoSerializer(many=False)
+    tipo_membresia = MiembroTipoSerializer(many=False)
+    genero = GeneroSerializer(many=False)
     usuario = UserSerializer(many=False, read_only=True)
     class Meta:
         model = Miembro
@@ -121,7 +123,8 @@ class MiembroMinSerializer(serializers.ModelSerializer):
             'direccion',
             'ultimo_pago',
             'usuario',
-            'imagen_de_perfil'
+            'imagen_de_perfil',
+            'genero'
         ]
 
 
@@ -131,6 +134,25 @@ class MiembroImageSerializer(serializers.ModelSerializer):
 
         fields = [
             'imagen_de_perfil'
+        ]
+
+
+class AsistenciaSerializer(serializers.ModelSerializer):
+    miembro = serializers.StringRelatedField(many=False)
+    class Meta:
+        model = Asistencia
+        fields = [
+            'miembro',
+            'timestamp'
+        ]
+
+
+class AsistenciaMinSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Asistencia
+        fields = [
+            'miembro',
+            'timestamp'
         ]
 
 

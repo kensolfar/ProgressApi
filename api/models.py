@@ -27,6 +27,21 @@ class Genero(models.Model):
         return self.nombre
 
 
+class Provincia(models.Model):
+    nombre = models.CharField(max_length=255)
+    descripcion = models.CharField(max_length=255, null=True, blank=True)
+
+
+class Canton(models.Model):
+    nombre = models.CharField(max_length=255)
+    descripcion = models.CharField(max_length=255, null=True, blank=True)
+
+
+class Distrito(models.Model):
+    nombre = models.CharField(max_length=255)
+    apellidos = models.CharField(max_length=255, null=True, blank=True)
+
+
 class Miembro(models.Model):
     nombre = models.CharField(max_length=255)
     apellidos = models.CharField(max_length=255)
@@ -40,6 +55,7 @@ class Miembro(models.Model):
     contacto_de_emergencia = models.CharField(max_length=15, null=True, blank=True)
     imagen_de_perfil = models.ImageField(upload_to='images/', null=True, blank=True)
     ultimo_pago = models.DateField(null=True, blank=True)
+    anotaciones = models.CharField(max_length=500, null=True, blank=True, default='')
     usuario = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
@@ -50,6 +66,21 @@ class Miembro(models.Model):
             models.Index(fields=["apellidos", "nombre"]),
             models.Index(fields=["nombre"]),
             models.Index(fields=['estado_membresia'])
+        ]
+
+
+class Asistencia(models.Model):
+    miembro = models.ForeignKey(Miembro, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.timestamp
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["miembro", "timestamp"]),
+            models.Index(fields=["timestamp"]),
+            models.Index(fields=["miembro"]),
         ]
 
 
