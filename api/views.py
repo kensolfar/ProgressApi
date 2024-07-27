@@ -1,21 +1,22 @@
-from rest_framework.generics import ListAPIView, UpdateAPIView
+from rest_framework.generics import ListAPIView, UpdateAPIView, ListCreateAPIView
 from rest_framework.viewsets import ModelViewSet
 
 from .models import Miembro, UnidadDeMedida, Medicion, Rutina, MiembroTipo, MiembroEstado, Genero, Asistencia
 from .serializers import MiembroSerializer, UnidadDeMedidaSerializer, MedicionSerializer, \
     RutinaDetalleSerializer, RutinaSerializer, MiembroMinSerializer, MiembroTipoSerializer, MiembroEstadoSerializer, \
-    MiembroDetalleSerializer, MiembroImageSerializer, AsistenciaSerializer, AsistenciaMinSerializer
+    MiembroDetalleSerializer, MiembroImageSerializer, AsistenciaSerializer
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
 from rest_framework import authentication
-from rest_framework import  filters
+from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
+from django.contrib import admin
+admin.autodiscover()
 
-
-class AsistenciaView(ListAPIView):
+class AsistenciaView(ListCreateAPIView):
     """
     Lista a todos los miembros, o crea uno nuevo.
     """
@@ -28,7 +29,7 @@ class AsistenciaView(ListAPIView):
     search_fields = ['miembro', 'timestamp']
 
     def post(self, request, format=None):
-        serializer = AsistenciaMinSerializer(data=request.data)
+        serializer = AsistenciaSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

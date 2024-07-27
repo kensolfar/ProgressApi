@@ -70,11 +70,11 @@ class Miembro(models.Model):
 
 
 class Asistencia(models.Model):
-    miembro = models.ForeignKey(Miembro, on_delete=models.CASCADE)
-    timestamp = models.DateTimeField(auto_now_add=True)
+    miembro = models.ForeignKey(Miembro, on_delete=models.CASCADE, related_name='asistencia')
+    timestamp = models.DateTimeField()
 
     def __str__(self):
-        return self.timestamp
+        return str(self.timestamp)
 
     class Meta:
         indexes = [
