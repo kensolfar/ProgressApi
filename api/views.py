@@ -18,24 +18,6 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib import admin
 admin.autodiscover()
 
-
-@api_view(['POST'])
-@authentication_classes([authentication.TokenAuthentication])
-@permission_classes([permissions.IsAuthenticated])
-def create_user(request):
-    if request.method == 'POST':
-        serializer = UserSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            response_data = {
-                'id': user.id,
-                'username': user.username,
-                'email': user.email
-            }
-            return Response(response_data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
-
-
 class AsistenciaView(ListCreateAPIView):
     """
     Lista a todos los miembros, o crea uno nuevo.
