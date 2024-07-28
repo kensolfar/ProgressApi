@@ -20,5 +20,6 @@ urlpatterns = [
     path('medicion/<int:id>', views.MedicionDetalle.as_view()),
     path('rutina', views.RutinaView.as_view()),
     path('rutina/<int:id>', views.RutinaView.as_view()),
-    path('asistencia', views.AsistenciaView.as_view()),
+    path('asistencia/', views.AsistenciaView.as_view()),
+    path('users/', include('users.urls'), name='users'),
 ]

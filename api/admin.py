@@ -42,9 +42,9 @@ class GeneroAdmin(admin.ModelAdmin):
 
 @admin.register(Miembro)
 class MiembroAdmin(admin.ModelAdmin):
-    list_display = ['nombre','apellidos','tipo_membresia']
-    list_filter = ['nombre']
-    search_fields = ['nombre','apellidos']
+    list_display = ['id','nombre','apellidos','tipo_membresia']
+    list_filter = ['apellidos']
+    search_fields = ['id','nombre','apellidos']
 
 
 @admin.register(Instructor)

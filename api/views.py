@@ -4,7 +4,9 @@ from rest_framework.viewsets import ModelViewSet
 from .models import Miembro, UnidadDeMedida, Medicion, Rutina, MiembroTipo, MiembroEstado, Genero, Asistencia
 from .serializers import MiembroSerializer, UnidadDeMedidaSerializer, MedicionSerializer, \
     RutinaDetalleSerializer, RutinaSerializer, MiembroMinSerializer, MiembroTipoSerializer, MiembroEstadoSerializer, \
-    MiembroDetalleSerializer, MiembroImageSerializer, AsistenciaSerializer
+    MiembroDetalleSerializer, MiembroImageSerializer, AsistenciaSerializer, UserSerializer
+
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -15,6 +17,24 @@ from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib import admin
 admin.autodiscover()
+
+
+@api_view(['POST'])
+@authentication_classes([authentication.TokenAuthentication])
+@permission_classes([permissions.IsAuthenticated])
+def create_user(request):
+    if request.method == 'POST':
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            response_data = {
+                'id': user.id,
+                'username': user.username,
+                'email': user.email
+            }
+            return Response(response_data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
 
 class AsistenciaView(ListCreateAPIView):
     """
