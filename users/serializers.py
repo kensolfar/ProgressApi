@@ -1,12 +1,12 @@
-from rest_framework import serializers
 from django.contrib.auth.models import User
+from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
         extra_kwargs = {
-            'password': {'write_only': True}
+            'password': {'write_only': True, 'required': False}
         }
 
     def create(self, validated_data):
@@ -22,10 +22,11 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
     def update(self, instance, validated_data):
-        # Actualizar todos los campos del usuario
+        # Actualizar todos los campos del usuario excepto la contraseña si no se proporciona
         for attr, value in validated_data.items():
             if attr == 'password':
-                instance.set_password(value)
+                if value:  # Solo cambiar la contraseña si se proporciona un valor
+                    instance.set_password(value)
             else:
                 setattr(instance, attr, value)
         instance.save()
