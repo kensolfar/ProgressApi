@@ -11,8 +11,8 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework import permissions
-from rest_framework import authentication
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework_simplejwt.authentication import JWTAuthentication
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 from django.contrib import admin
@@ -24,8 +24,8 @@ class AsistenciaView(ListCreateAPIView):
     """
     queryset = Asistencia.objects.all()
     serializer_class = AsistenciaSerializer
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     filterset_fields = ['miembro', 'timestamp']
     search_fields = ['miembro', 'timestamp']
@@ -45,8 +45,8 @@ class MiembroLista(ListAPIView):
     """
     queryset = Miembro.objects.all()
     serializer_class = MiembroSerializer
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
     filterset_fields = ['nombre', 'apellidos', 'estado_membresia', 'tipo_membresia']
     search_fields = ['nombre', 'apellidos']
@@ -61,8 +61,8 @@ class MiembroLista(ListAPIView):
 
 class MiembroListaMinView(ListAPIView):
 
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Miembro.objects.all()
     serializer_class = MiembroMinSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
@@ -74,8 +74,8 @@ class MiembroDetalle(APIView):
     """
     Devuelve, actualiza o borra una instancia de miembro
     """
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_miembro(self, id):
         try:
@@ -107,8 +107,8 @@ class MiembroDetalle(APIView):
 
 
 class MiembroImageView(UpdateAPIView):
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_miembro(self, id):
         try:
@@ -133,8 +133,8 @@ class MiembroImageView(UpdateAPIView):
 
 
 class UnidadDeMedidaView(ModelViewSet):
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = UnidadDeMedidaSerializer
     queryset = UnidadDeMedida.objects.all()
     filter_backends = [DjangoFilterBackend]
@@ -142,31 +142,31 @@ class UnidadDeMedidaView(ModelViewSet):
 
 
 class TipoMiembroView(ModelViewSet):
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = MiembroTipoSerializer
     queryset = MiembroTipo.objects.all()
     filter_backends = [DjangoFilterBackend]
 
 
 class EstadoMiembroView(ModelViewSet):
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = MiembroEstadoSerializer
     queryset = MiembroEstado.objects.all()
     filter_backends = [DjangoFilterBackend]
 
 
 class GeneroView(ModelViewSet):
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = MiembroEstadoSerializer
     queryset = Genero.objects.all()
     filter_backends = [DjangoFilterBackend]
 
 class MedicionView(ListAPIView):
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = MedicionSerializer
     queryset = Medicion.objects.all()
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
@@ -185,8 +185,8 @@ class MedicionDetalle(APIView):
     """
     Devuelve, actualiza o borra una instancia de miembro
     """
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_medicion(self, id):
         try:
@@ -214,8 +214,8 @@ class MedicionDetalle(APIView):
 
 
 class RutinaView(ListAPIView):
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = RutinaDetalleSerializer
     queryset = Rutina.objects.all()
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
@@ -234,8 +234,8 @@ class RutinaDetalleView(APIView):
     """
     Devuelve, actualiza o borra una instancia de Rutina
     """
-    authentication_classes = [authentication.TokenAuthentication]
-    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
     def get_rutina(self, id):
         try:

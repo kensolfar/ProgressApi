@@ -1,5 +1,33 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer
+from rest_framework_simplejwt.tokens import RefreshToken
+from datetime import datetime
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+
+        refresh = self.get_token(self.user)
+
+        data['refresh'] = str(refresh)
+        data['access'] = str(refresh.access_token)
+        data['access_token_expiration'] = datetime.fromtimestamp(refresh.access_token['exp'])
+        data['refresh_token_expiration'] = datetime.fromtimestamp(refresh['exp'])
+
+        return data
+
+class CustomTokenRefreshSerializer(TokenRefreshSerializer):
+    def validate(self, attrs):
+        data = super().validate(attrs)
+
+        refresh = RefreshToken(attrs['refresh'])
+        data['refresh'] = str(refresh)
+        data['access'] = str(refresh.access_token)
+        data['access_token_expiration'] = datetime.fromtimestamp(refresh.access_token['exp'])
+        data['refresh_token_expiration'] = datetime.fromtimestamp(refresh['exp'])
+
+        return data
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
