@@ -7,9 +7,16 @@ from .models import (
     MiembroTipo,
     MiembroEstado,
     Genero,
+    Asistencia,
     Medicion, UnidadDeMedida, Ejercicio, Repeticion, DiaDeRutina, EjerciciosPorDia, GrupoMuscular, Instrumento,
     MusculosPorDia, RecursosDeEjercicio, InstrumentosDeEjercicio, MusculosDeEjercicio, Recurso, Musculo
 )
+
+@admin.register(Asistencia)
+class AsistenciaAdmin(admin.ModelAdmin):
+    list_display = ['miembro', 'timestamp']
+    list_filter = ['miembro', 'timestamp']
+    search_fields = ['miembro', 'timestamp']
 
 
 @admin.register(MiembroEstado)
@@ -35,9 +42,9 @@ class GeneroAdmin(admin.ModelAdmin):
 
 @admin.register(Miembro)
 class MiembroAdmin(admin.ModelAdmin):
-    list_display = ['nombre','apellidos','tipo_membresia']
-    list_filter = ['nombre']
-    search_fields = ['nombre','apellidos']
+    list_display = ['id','nombre','apellidos','tipo_membresia']
+    list_filter = ['apellidos']
+    search_fields = ['id','nombre','apellidos']
 
 
 @admin.register(Instructor)

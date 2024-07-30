@@ -1,5 +1,7 @@
+import time
+
 from rest_framework import serializers
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from .models import (
     Objetivo,
     Rutina,
@@ -9,25 +11,17 @@ from .models import (
     MiembroEstado,
     Genero,
     Medicion, UnidadDeMedida, DiaDeRutina, EjerciciosPorDia, InstrumentosDeEjercicio, Instrumento, Ejercicio,
-    MusculosDeEjercicio, Musculo
+    MusculosDeEjercicio, Musculo, Asistencia
 )
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = [
-            'id',
-            'username',
-            'first_name',
-            'last_name',
-            'last_login',
-            'is_superuser',
-            'email',
-            'is_staff',
-            'is_active',
-            'date_joined'
-        ]
+        fields = '__all__'
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
 
 
 class MiembroEstadoSerializer(serializers.ModelSerializer):
@@ -60,11 +54,33 @@ class GeneroSerializer(serializers.ModelSerializer):
         ]
 
 
+class AsistenciaTimeStampField(serializers.RelatedField):
+    def to_representation(self, value):
+        momento_asistencia = time.strftime('%d %b %Y - %H:%M', time.gmtime(value.timestamp))
+        return 'Registrado a las: %s' % momento_asistencia
+
+
+class AsistenciaDetSerializer(serializers.ModelSerializer):
+    miembro = serializers.StringRelatedField(many=False)
+    class Meta:
+        model = Asistencia
+        fields = [
+            'miembro',
+            'timestamp'
+        ]
+
+
+class AsistenciaSerializer(serializers.ModelSerializer):
+    #timestamp = serializers.DateTimeField('%d %b %Y - %H:%M')
+    #timestamp = serializers.DateTimeField('%s')
+    class Meta:
+        model = Asistencia
+        fields = '__all__'
+
+
 class MiembroDetalleSerializer(serializers.ModelSerializer):
-    estado_membresia = serializers.StringRelatedField(many=False)
-    tipo_membresia = serializers.StringRelatedField(many=False)
-    genero = serializers.StringRelatedField(many=False)
     usuario = UserSerializer(many=False, read_only=True)
+    asistencia = serializers.SlugRelatedField(many=True, read_only=True, slug_field='timestamp')
     
     class Meta:
         model = Miembro
@@ -81,7 +97,9 @@ class MiembroDetalleSerializer(serializers.ModelSerializer):
             'contacto_de_emergencia',
             'imagen_de_perfil',
             'ultimo_pago',
-            'usuario'
+            'anotaciones',
+            'usuario',
+            'asistencia'
         ]
 
 
@@ -101,13 +119,15 @@ class MiembroSerializer(serializers.ModelSerializer):
             'contacto_de_emergencia',
             'imagen_de_perfil',
             'ultimo_pago',
-            'usuario'
+            'usuario',
+            'anotaciones'
         ]
 
 class MiembroMinSerializer(serializers.ModelSerializer):
 
-    estado_membresia = serializers.StringRelatedField(many=False)
-    tipo_membresia = serializers.StringRelatedField(many=False)
+    estado_membresia = MiembroEstadoSerializer(many=False)
+    tipo_membresia = MiembroTipoSerializer(many=False)
+    genero = GeneroSerializer(many=False)
     usuario = UserSerializer(many=False, read_only=True)
     class Meta:
         model = Miembro
@@ -121,7 +141,8 @@ class MiembroMinSerializer(serializers.ModelSerializer):
             'direccion',
             'ultimo_pago',
             'usuario',
-            'imagen_de_perfil'
+            'imagen_de_perfil',
+            'genero'
         ]
 
 
@@ -338,3 +359,15 @@ class RutinaSerializer(serializers.ModelSerializer):
             'semanas',
             'objetivo'
         ]
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'email', "first_name", "last_name")
+
+
+class GroupSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Group
+        fields = ("name", )

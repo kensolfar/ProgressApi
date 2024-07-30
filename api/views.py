@@ -1,18 +1,42 @@
-from rest_framework.generics import ListAPIView, UpdateAPIView
+from rest_framework.generics import ListAPIView, UpdateAPIView, ListCreateAPIView
 from rest_framework.viewsets import ModelViewSet
 
-from .models import Miembro, UnidadDeMedida, Medicion, Rutina, MiembroTipo, MiembroEstado, Genero
+from .models import Miembro, UnidadDeMedida, Medicion, Rutina, MiembroTipo, MiembroEstado, Genero, Asistencia
 from .serializers import MiembroSerializer, UnidadDeMedidaSerializer, MedicionSerializer, \
     RutinaDetalleSerializer, RutinaSerializer, MiembroMinSerializer, MiembroTipoSerializer, MiembroEstadoSerializer, \
-    MiembroDetalleSerializer, MiembroImageSerializer
+    MiembroDetalleSerializer, MiembroImageSerializer, AsistenciaSerializer, UserSerializer
+
+from rest_framework.decorators import api_view, authentication_classes, permission_classes
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
 from rest_framework import authentication
-from rest_framework import  filters
+from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
+from django.contrib import admin
+admin.autodiscover()
+
+class AsistenciaView(ListCreateAPIView):
+    """
+    Lista a todos los miembros, o crea uno nuevo.
+    """
+    queryset = Asistencia.objects.all()
+    serializer_class = AsistenciaSerializer
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter]
+    filterset_fields = ['miembro', 'timestamp']
+    search_fields = ['miembro', 'timestamp']
+
+    def post(self, request, format=None):
+        serializer = AsistenciaSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class MiembroLista(ListAPIView):
@@ -104,6 +128,8 @@ class MiembroImageView(UpdateAPIView):
         miembro = self.get_miembro(id)
         serializer = MiembroImageSerializer(miembro)
         return Response(serializer.data)
+
+
 
 
 class UnidadDeMedidaView(ModelViewSet):

@@ -19,12 +19,12 @@ from django.urls import path
 from django.conf.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
-from rest_framework.authtoken.views import obtain_auth_token
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('auth/', include('authentication.urls')),  # Incluye las URLs de la app de autenticación
     path('api/v1/', include('api.urls')),
-    path('auth/', obtain_auth_token)
 ]
 
 if settings.DEBUG:
