@@ -45,6 +45,7 @@ class Distrito(models.Model):
 class Miembro(models.Model):
     nombre = models.CharField(max_length=255)
     apellidos = models.CharField(max_length=255)
+    cedula = models.CharField(max_length=10, default='0000000000')
     estado_membresia = models.ForeignKey(MiembroEstado, related_name='estado_membresia', default=1, on_delete=models.RESTRICT)
     tipo_membresia = models.ForeignKey(MiembroTipo, related_name='tipo_membresia', on_delete=models.RESTRICT, default=1)
     direccion = models.CharField(max_length=255, null=True, blank=True)
