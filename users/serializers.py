@@ -3,12 +3,16 @@ from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer, TokenRefreshSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from datetime import datetime
+from django.utils import timezone
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
 
         refresh = self.get_token(self.user)
+
+        self.user.last_login = timezone.localtime()
+        self.user.save(update_fields=['last_login'])
 
         data['refresh'] = str(refresh)
         data['access'] = str(refresh.access_token)
