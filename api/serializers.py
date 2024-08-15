@@ -7,7 +7,7 @@ from .models import (
     Rutina,
     Instructor,
     Miembro,
-    MiembroTipo,
+    Plan,
     MiembroEstado,
     Genero,
     Medicion, UnidadDeMedida, DiaDeRutina, EjerciciosPorDia, InstrumentosDeEjercicio, Instrumento, Ejercicio,
@@ -36,7 +36,7 @@ class MiembroEstadoSerializer(serializers.ModelSerializer):
 
 class MiembroTipoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = MiembroTipo
+        model = Plan
         fields = [
             'id',
             'nombre',
@@ -81,16 +81,54 @@ class AsistenciaSerializer(serializers.ModelSerializer):
 class MiembroDetalleSerializer(serializers.ModelSerializer):
     usuario = UserSerializer(many=False, read_only=True)
     asistencia = serializers.SlugRelatedField(many=True, read_only=True, slug_field='timestamp')
-    
+    estado_membresia = serializers.StringRelatedField(many=False)
+    plan = serializers.StringRelatedField(many=False)
+    genero = serializers.StringRelatedField(many=False)
+
     class Meta:
         model = Miembro
-        fields = '__all__'
+        fields = [
+            'id',
+            'nombre',
+            'apellidos',
+            'direccion',
+            'cedula',
+            'estado_membresia',
+            'plan',
+            'fecha_nacimiento',
+            'genero',
+            'contacto',
+            'contacto_de_emergencia',
+            'imagen_de_perfil',
+            'ultimo_pago',
+            'anotaciones',
+            'usuario',
+            'asistencia'
+        ]
 
 
 class MiembroSerializer(serializers.ModelSerializer):
     class Meta:
         model = Miembro
-        fields = '__all__'
+        fields = [
+            'id',
+            'nombre',
+            'apellidos',
+            'cedula',
+            'direccion',
+            'estado_membresia',
+            'plan',
+            'es_frecuente',
+            'marcador',
+            'fecha_nacimiento',
+            'genero',
+            'contacto',
+            'contacto_de_emergencia',
+            'imagen_de_perfil',
+            'ultimo_pago',
+            'usuario',
+            'anotaciones'
+        ]
 
 class MiembroMinSerializer(serializers.ModelSerializer):
 

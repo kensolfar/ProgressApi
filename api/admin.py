@@ -4,7 +4,7 @@ from .models import (
     Rutina,
     Instructor,
     Miembro,
-    MiembroTipo,
+    Plan,
     MiembroEstado,
     Genero,
     Asistencia,
@@ -26,7 +26,7 @@ class MiembroEstadoAdmin(admin.ModelAdmin):
     search_fields = ['nombre']
 
 
-@admin.register(MiembroTipo)
+@admin.register(Plan)
 class MiembroTipoAdmin(admin.ModelAdmin):
     list_display = ['nombre']
     list_filter = ['nombre']
@@ -42,7 +42,7 @@ class GeneroAdmin(admin.ModelAdmin):
 
 @admin.register(Miembro)
 class MiembroAdmin(admin.ModelAdmin):
-    list_display = ['id','nombre','apellidos','tipo_membresia', 'usuario']
+    list_display = ['id','nombre','apellidos','plan', 'usuario']
     list_filter = ['apellidos']
     search_fields = ['id','nombre','apellidos', 'usuario']
 

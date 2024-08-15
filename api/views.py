@@ -1,7 +1,7 @@
 from rest_framework.generics import ListAPIView, UpdateAPIView, ListCreateAPIView
 from rest_framework.viewsets import ModelViewSet
 
-from .models import Miembro, UnidadDeMedida, Medicion, Rutina, MiembroTipo, MiembroEstado, Genero, Asistencia
+from .models import Miembro, UnidadDeMedida, Medicion, Rutina, Plan, MiembroEstado, Genero, Asistencia
 from .serializers import MiembroSerializer, UnidadDeMedidaSerializer, MedicionSerializer, \
     RutinaDetalleSerializer, RutinaSerializer, MiembroMinSerializer, MiembroTipoSerializer, MiembroEstadoSerializer, \
     MiembroDetalleSerializer, MiembroImageSerializer, AsistenciaSerializer, UserSerializer
@@ -48,7 +48,7 @@ class MiembroLista(ListAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly]
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    filterset_fields = ['nombre', 'apellidos', 'estado_membresia', 'tipo_membresia']
+    filterset_fields = ['nombre', 'apellidos', 'estado_membresia', 'plan']
     search_fields = ['nombre', 'apellidos']
 
     def post(self, request, format=None):
@@ -59,14 +59,14 @@ class MiembroLista(ListAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class MiembroListaMinView(ListAPIView):
+class MiembroListaView(ListAPIView):
 
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Miembro.objects.all()
-    serializer_class = MiembroMinSerializer
+    serializer_class = MiembroDetalleSerializer
     filter_backends = [DjangoFilterBackend, filters.SearchFilter]
-    filterset_fields = ['nombre', 'apellidos', 'estado_membresia', 'tipo_membresia']
+    filterset_fields = ['nombre', 'apellidos', 'estado_membresia', 'plan']
     search_fields = ['nombre', 'apellidos']
 
 
@@ -145,7 +145,7 @@ class TipoMiembroView(ModelViewSet):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticatedOrReadOnly]
     serializer_class = MiembroTipoSerializer
-    queryset = MiembroTipo.objects.all()
+    queryset = Plan.objects.all()
     filter_backends = [DjangoFilterBackend]
 
 

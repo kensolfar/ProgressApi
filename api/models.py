@@ -11,7 +11,7 @@ class MiembroEstado(models.Model):
         return self.nombre
 
 
-class MiembroTipo(models.Model):
+class Plan(models.Model):
     nombre = models.CharField(max_length=50, null=False)
     descripcion = models.CharField(max_length=50, null=True, blank=True)
 
@@ -47,8 +47,10 @@ class Miembro(models.Model):
     apellidos = models.CharField(max_length=255)
     cedula = models.CharField(max_length=10, default='0000000000')
     estado_membresia = models.ForeignKey(MiembroEstado, related_name='estado_membresia', default=1, on_delete=models.RESTRICT)
-    tipo_membresia = models.ForeignKey(MiembroTipo, related_name='tipo_membresia', on_delete=models.RESTRICT, default=1)
+    plan = models.ForeignKey(Plan, related_name='plan_membresia', on_delete=models.RESTRICT, default=1)
     direccion = models.CharField(max_length=255, null=True, blank=True)
+    es_frecuente = models.BooleanField(default=False)
+    marcador = models.BooleanField(default=False)
     fecha_nacimiento = models.DateField(null=True)
     fecha_registro = models.DateField(auto_now_add=True)
     genero = models.ForeignKey(Genero, related_name='genero', on_delete=models.RESTRICT, null=True)
